@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,7 +45,7 @@
     </section>
     <section class="section2">
         <form id="form">
-            <input type="text" name="shorten" placeholder="Shorten a link here..." id="form-text">
+            <input type="text" name="shorten" placeholder="Shorten a link here..." id="form-text" aria-label="Shorten a link here">
             <p id="error">Please add a link</p>
             <button type="submit" id="form-btn">Shorten It!</button>
             <div id="result"></div>
@@ -57,19 +57,19 @@
             the web with our advanced statistics dashboard.</p>
         <div class="section3-blocks">
             <section class="section3-block1">
-                <img src="./images/icon-brand-recognition.svg" class="section3-icon1">
+                <img src="./images/icon-brand-recognition.svg" class="section3-icon1" alt="brand recognition">
                 <h3 class="section3-block1-h3">Brand Recognition</h3>
                 <p class="section3-block1-p">Boost your brand recognition with each click. Generic links don't
                     mean a thing. Branded links help instil confidence in your content.</p>
             </section>
             <section class="section3-block2">
-                <img src="./images/icon-detailed-records.svg" class="section3-icon2">
+                <img src="./images/icon-detailed-records.svg" class="section3-icon2" alt="detailed records">
                 <h3 class="section3-block2-h3">Detailed Records</h3>
                 <p class="section3-block2-p">Gain insights into who is clicking your links. Knowing when and
                     where people engage with your content helps inform better decisions.</p>
             </section>
             <section class="section3-block3">
-                <img src="./images/icon-fully-customizable.svg" class="section3-icon3">
+                <img src="./images/icon-fully-customizable.svg" class="section3-icon3" alt="customizable">
                 <h3 class="section3-block3-h3">Fully Custiomizable</h3>
                 <p class="section3-block3-p">Improve brand awareness and content discoverability through
                     customizable links, supercharging audience engagement.</p>
@@ -108,7 +108,7 @@
             <i class="fab fa-instagram"></i>
         </div>
     </footer>
-    <script async defer>
+    <script>
         $(document).ready(function () {
             // https://rel.ink/api/links/
 
