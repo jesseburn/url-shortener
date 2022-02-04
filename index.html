@@ -17,7 +17,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"
     integrity="sha512-sIqUEnRn31BgngPmHt2JenzleDDsXwYO+iyvQ46Mw6RL+udAUZj2n/u/PGY80NxRxynO7R9xIGx5LEzw4INWJQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/garlic.js/1.4.2/garlic.min.js"
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/garlic.js/1.4.1/garlic.min.js"
     integrity="sha512-UWthFfLTzUb9PtiaLyf8Z9HD0NzXoZ++0+qBwD+CGnehBBLWgz+t2p3xL08lrkmnB1pLsjkQcoTOzsiRgwJmxw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
@@ -37,6 +37,7 @@
       border-top: 2px solid #71717A;
     }
   }
+
   #form,
   .bg-2 {
     background-image: url("./images/bg-shorten-desktop.svg");
@@ -44,12 +45,11 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
-
 </style>
 
 <body class="flex flex-col">
-  <header class="flex flex-row w-full px-6 pt-3 md:px-24 sm:pt-6">
-    <nav class="flex flex-col justify-between w-full ml-0 lg:flex-row sm:items-start">
+  <header class="flex flex-row w-full px-6 pt-3 md:px-24 sm:pt-6" role="banner">
+    <nav class="flex flex-col justify-between w-full ml-0 lg:flex-row sm:items-start" role="navigation">
       <img src="./images/logo.svg" alt="Shortly"
         class="object-contain object-center h-auto max-w-45p w-40p md:w-20p lg:w-auto" aria-label="Shortly">
       <div
@@ -59,9 +59,9 @@
         <a href="" aria-label="Resources" class="pb-3p lg:pl-5p lg:pr-35p lg:py-0 lg:hover:text-primary2">Resources</a>
         <a href="" aria-label="Login"
           class="w-full py-5p md:py-3p lg:py-0 lg:w-auto border-top-white lg:p-0 lg:text-zinc-500 lg:hover:text-primary2">Login</a>
-        <button
+        <button role="button"
           class="w-full rounded-full lg:w-1/6 lg:h-10 lg:ml-12 lg:p-1 p-2p bg-primary1 text-neutral-50 hover:bg-cyan-300">
-          <a href="" aria-label="Sign up">Sign Up</a>
+          Sign Up
         </button>
       </div>
       <img src="./images/icon-hamburger.svg" alt="mobile nav open" aria-label="mobile nav open"
@@ -70,14 +70,16 @@
         class="absolute hidden object-contain object-center w-6 h-7 left-80p close">
     </nav>
   </header>
-  <section class="flex flex-col-reverse justify-around w-full px-6 pt-4 md:flex-row sm:px-24 md:pt-6 lg:pt-12">
+  <section class="flex flex-col-reverse justify-around w-full px-6 pt-4 md:flex-row sm:px-24 md:pt-6 lg:pt-12"
+    role="main">
     <div class="flex flex-col items-center text-center sm:items-start sm:text-left">
       <h1 class="pt-3 text-3xl font-bold sm:pt-0 md:text-4xl lg:text-6xl text-neutral-700">More than just shorter links
       </h1>
       <p class="px-2 pt-2 lg:pr-5p sm:px-0 text-zinc-500">Build your brand’s recognition and get detailed insights
         on how your links are performing.</p>
-      <button class="w-1/2 h-10 mt-6 text-sm rounded-full sm:w-32 bg-primary1 text-neutral-50 hover:bg-cyan-300">
-        <a href="" aria-label="Get Started" class="">Get Started</a>
+      <button role="button"
+        class="w-1/2 h-10 mt-6 text-sm rounded-full sm:w-32 bg-primary1 text-neutral-50 hover:bg-cyan-300">
+        Get Started
       </button>
     </div>
     <figure class="w-96 md:w-screen lg:w-3/4">
@@ -85,16 +87,18 @@
         class="object-contain object-center overflow-visible md:ml-50p lg:ml-40">
     </figure>
   </section>
-  <div id="form" class="z-50 flex flex-col p-4 mx-6 mt-6 border-none rounded-lg md:p-4 sm:flex-row lg:p-12 sm:mx-24 bg-primary2">
-    <input type="text" name="shorten" placeholder="Shorten a link here..." aria-label="Shorten a link here"
-      class="w-full h-10 pl-3 border-none rounded-lg sm:w-3/4 sm:h-auto sm:p-3 sm:mr-6" id="form-text">
+  <div id="form" role="form"
+    class="z-50 flex flex-col p-4 mx-6 mt-6 border-none rounded-lg md:p-4 sm:flex-row lg:p-12 sm:mx-24 bg-primary2">
+    <input role="textbox" type="text" name="shorten" placeholder="Shorten a link here..."
+      aria-label="Shorten a link here" class="w-full h-10 pl-3 border-none rounded-lg sm:w-3/4 sm:h-auto sm:p-3 sm:mr-6"
+      id="form-text">
     <p id="error" class="absolute hidden text-sm text-red-600 sm:ml-2 sm:mt-14">Please add a link</p>
     <button
-      class="w-full h-10 mt-3 text-sm border-none rounded-lg sm:mt-0 sm:w-32 sm:h-12 bg-primary1 text-neutral-50 hover:bg-cyan-300" id="form-btn">Shorten
-      It!</button>
+      class="w-full h-10 mt-3 text-sm border-none rounded-lg sm:mt-0 sm:w-32 sm:h-12 bg-primary1 text-neutral-50 hover:bg-cyan-300"
+      id="form-btn">Shorten It!</button>
     <div id="result"></div>
   </div>
-  <section class="z-0 flex flex-col pt-32 pb-16 -mt-16 bg-gray-100 md:-mt-5p md:pt-32 lg:pt-48 sm:pb-28">
+  <section role="main" class="z-0 flex flex-col pt-32 pb-16 -mt-16 bg-gray-100 md:-mt-5p md:pt-32 lg:pt-48 sm:pb-28">
     <div class="items-center text-center">
       <h2 class="text-2xl font-semibold sm:text-3xl text-neutral-700">Advanced Statistics</h2>
       <p class="w-full pt-2 text-base md:px-15p lg:px-30p text-zinc-500">Track how your links are performing
@@ -139,13 +143,14 @@
       <span class="z-0 hidden lg:block lg:absolute sm:w-1/2 sm:h-2 sm:ml-64 sm:mt-36 bg-primary1"></span>
     </div>
   </section>
-  <div class="flex flex-col items-center justify-center py-10 text-center bg-2 bg-primary2 text-neutral-50">
+  <div role="main" class="flex flex-col items-center justify-center py-10 text-center bg-2 bg-primary2 text-neutral-50">
     <h4 class="font-semibold text-2lg sm:text-3xl">Boost your links today</h4>
     <button class="h-10 mt-3 text-sm border-none rounded-full w-36 sm:w-32 sm:mt-6 bg-primary1 hover:bg-cyan-300">Get
       Started</button>
   </div>
   <footer
-    class="flex flex-col items-center w-full py-6 text-center sm:text-left sm:items-start sm:flex-row md:px-24 sm:py-12 text-neutral-50 bg-neutral2">
+    class="flex flex-col items-center w-full py-6 text-center sm:text-left sm:items-start sm:flex-row md:px-24 sm:py-12 text-neutral-50 bg-neutral2"
+    role="contentinfo">
     <div class="sm:w-1/4 lg:m-0 md:mr-2p">
       <img src="./images/logo.svg" alt="Shortly" aria-label="Shortly" class="invert">
     </div>
@@ -180,6 +185,8 @@
 
       $("#form-btn").on("click", function (e) {
         $("#form").garlic();
+
+
         //console.log('buttton clicked');
         e.preventDefault();
         let result = document.getElementById("result");
@@ -188,20 +195,20 @@
         /* https://googlechrome.github.io/samples/fetch-api/fetch-post.html
             Fetch API post request to get information for url shortener */
         fetch(`https://api.shrtco.de/v2/shorten?url=${longUrl}`)
-        .then(response => {
-          // if the res if 400 the error message will display
-          if (response.status == 400) {
-            $("#form-text").css("border", "3px solid hsl(0, 94%, 66%)");
-            $("#error").css("display", "block");
-            $("#form-text").focus();
-            return;
-          } else {
-            $("#error").css("display", "none");
-            $("#form-text").css("border", "none");
-            $("#form-text").focus();
-            return response.json();
-          }
-        })
+          .then(response => {
+            // if the res if 400 the error message will display
+            if (response.status == 400) {
+              $("#form-text").css("border", "3px solid hsl(0, 94%, 66%)");
+              $("#error").css("display", "block");
+              $("#form-text").focus();
+              return;
+            } else {
+              $("#error").css("display", "none");
+              $("#form-text").css("border", "none");
+              $("#form-text").focus();
+              return response.json();
+            }
+          })
           // promises returned create output box for shortened url along with a copy btn
           .then(data => {
             if (data === undefined) {
@@ -212,6 +219,7 @@
             const outputBox = document.createElement("input");
             const shortUrl = document.createElement("input");
             const copyBtn = document.createElement("button");
+            $(".output").garlic();
 
             $(copyBtn).attr({
               "type": "button",
@@ -296,6 +304,17 @@
               console.log(error);
             }
           )
+
+        // local storage
+        $(window).on("load", function (e) {
+          setTimeout(function () {
+            if (localStorage.key(0) != null) {
+              $("#form-btn").click();
+            } else {
+              console.log("Error-You need local storage");
+            }
+          }, 10);
+        });
       });
 
       // mobile nav
@@ -317,16 +336,7 @@
       });
     });
 
-    // local storage
-    $(window).on("load", function (e) {
-      setTimeout(function () {
-        if (localStorage.key(0) != null) {
-          $("#form-btn").click();
-        } else {
-          console.log("Error-You need local storage");
-        }
-      }, 10);
-    });
+
   </script>
 </body>
 <!-- npx tailwind build -i input.css -o ./styles/output.css --watch -->
