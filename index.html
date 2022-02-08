@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Frontend Mentor | Shortly URL shortening API Challenge</title>
+  <title>Shortly URL shortening API Challenge</title>
   <link rel="stylesheet" href="./styles/output.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,6 +20,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/garlic.js/1.4.1/garlic.min.js"
     integrity="sha512-UWthFfLTzUb9PtiaLyf8Z9HD0NzXoZ++0+qBwD+CGnehBBLWgz+t2p3xL08lrkmnB1pLsjkQcoTOzsiRgwJmxw=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="scripts.js"></script>
 </head>
 <style>
   html,
@@ -77,8 +78,7 @@
       </h1>
       <p class="px-2 pt-2 lg:pr-5p sm:px-0 text-zinc-500">Build your brand’s recognition and get detailed insights
         on how your links are performing.</p>
-      <button
-        class="w-1/2 h-10 mt-6 text-sm rounded-full sm:w-32 bg-primary1 text-neutral-50 hover:bg-cyan-300">
+      <button class="w-1/2 h-10 mt-6 text-sm rounded-full sm:w-32 bg-primary1 text-neutral-50 hover:bg-cyan-300">
         Get Started
       </button>
     </div>
@@ -87,17 +87,15 @@
         class="object-contain object-center overflow-visible md:ml-50p lg:ml-40">
     </figure>
   </section>
-  <div id="form"
-    class="z-50 flex flex-col p-4 mx-6 mt-6 border-none rounded-lg md:p-4 sm:flex-row lg:p-12 sm:mx-24 bg-primary2">
-    <input type="text" name="shorten" placeholder="Shorten a link here..."
-      aria-label="Shorten a link here" class="w-full h-10 pl-3 border-none rounded-lg sm:w-3/4 sm:h-auto sm:p-3 sm:mr-6"
-      id="form-text">
+  <form class="z-50 flex flex-col p-4 mx-6 mt-6 border-none rounded-lg md:p-4 sm:flex-row lg:p-12 sm:mx-24 bg-primary2">
+    <input type="text" name="shorten" placeholder="Shorten a link here..." aria-label="Shorten a link here"
+      class="w-full h-10 pl-3 border-none rounded-lg sm:w-3/4 sm:h-auto sm:p-3 sm:mr-6" id="form-text">
     <p id="error" class="absolute hidden text-sm text-red-600 sm:ml-2 sm:mt-14">Please add a link</p>
     <button
       class="w-full h-10 mt-3 text-sm border-none rounded-lg sm:mt-0 sm:w-32 sm:h-12 bg-primary1 text-neutral-50 hover:bg-cyan-300"
       id="form-btn">Shorten It!</button>
     <div id="result"></div>
-  </div>
+  </form>
   <section class="z-0 flex flex-col pt-32 pb-16 -mt-16 bg-gray-100 md:-mt-5p md:pt-32 lg:pt-48 sm:pb-28">
     <div class="items-center text-center">
       <h2 class="text-2xl font-semibold sm:text-3xl text-neutral-700">Advanced Statistics</h2>
@@ -179,164 +177,6 @@
       <i class="text-3xl fab fa-tiktok hover:text-primary1"></i>
     </div>
   </footer>
-  <script>
-    $(document).ready(function () {
-
-      $("#form-btn").on("click", function (e) {
-        $("#form").garlic();
-
-
-        //console.log('buttton clicked');
-        e.preventDefault();
-        let result = document.getElementById("result");
-        let longUrl = $("#form-text").val();
-
-        /* https://googlechrome.github.io/samples/fetch-api/fetch-post.html
-            Fetch API post request to get information for url shortener */
-        fetch(`https://api.shrtco.de/v2/shorten?url=${longUrl}`)
-          .then(response => {
-            // if the res if 400 the error message will display
-            if (response.status == 400) {
-              $("#form-text").css("border", "3px solid hsl(0, 94%, 66%)");
-              $("#error").css("display", "block");
-              $("#form-text").focus();
-              return;
-            } else {
-              $("#error").css("display", "none");
-              $("#form-text").css("border", "none");
-              $("#form-text").focus();
-              return response.json();
-            }
-          })
-          // promises returned create output box for shortened url along with a copy btn
-          .then(data => {
-            if (data === undefined) {
-              return;
-            }
-
-            let output = document.createElement("div");
-            const outputBox = document.createElement("input");
-            const shortUrl = document.createElement("input");
-            const copyBtn = document.createElement("button");
-            $(".output").garlic();
-
-            $(copyBtn).attr({
-              "type": "button",
-              "data-clipboard-target": "#copy-target",
-              "class": "copy-btn",
-              "id": "copy-button"
-            });
-            $(output).attr({
-              "class": "output",
-              "readonly": true
-            });
-            $(outputBox).attr({
-              "class": "output-box",
-              "readonly": true
-            });
-            $(shortUrl).attr({
-              "class": "short-url",
-              "id": "copy-target",
-              "readonly": true
-            });
-            copyBtn.textContent = "Copy";
-            //console.log(data);
-            outputBox.value = `${$("#form-text").val()}`;
-            shortUrl.value = `${data.result.full_short_link}`;
-            output.appendChild(outputBox);
-            output.appendChild(shortUrl);
-            output.appendChild(copyBtn);
-            result.appendChild(output);
-
-            // styles for output and btn
-
-            $(".output").css({
-              "width": "86%",
-              "height": "3rem",
-              "display": "flex",
-              "justify-content": "space-between",
-              "background-color": "#ffffff",
-              "align-items": "center",
-              "position": "absolute",
-              "top": "120%",
-              "left": "7%",
-              "padding": "1%",
-              "border-radius": "9px"
-            });
-            $(".output-box").css({
-              "width": "50%",
-              "border": "none",
-              "font-size": "1rem"
-            });
-            $(".short-url").css({
-              "width": "20%",
-              "border": "none",
-              "font-size": "1rem",
-              "color": "hsl(180, 66%, 49%)"
-            });
-            $(".copy-btn").css({
-              "background-color": "hsl(180, 66%, 49%)",
-              "width": "7rem",
-              "height": "2.5rem",
-              "color": "#ffffff",
-              "border": "none",
-              "border-radius": "9px",
-              "font-size": "1rem"
-            });
-            // copy btn
-            $(copyBtn).on("click", function (e) {
-              new ClipboardJS("#copy-button");
-              $(copyBtn).css("background-color", "hsl(257, 27%, 26%)");
-              e.target.innerHTML = "Copied!";
-              //console.log("you copied it!");
-
-              let timeout = setTimeout(function () {
-                $(copyBtn).css("background-color", "hsl(180, 66%, 49%)");
-                copyBtn.textContent = "Copy";
-                //console.log(e.target);
-              }, 300)
-              // new ClipboardJS("#copy-button");
-            });
-
-          }).catch(
-            error => {
-              console.log(error);
-            }
-          )
-
-        // local storage
-        $(window).on("load", function (e) {
-          setTimeout(function () {
-            if (localStorage.key(0) != null) {
-              $("#form-btn").click();
-            } else {
-              console.log("Error-You need local storage");
-            }
-          }, 10);
-        });
-      });
-
-      // mobile nav
-      $(".ham").click(function () {
-        $("nav").children("div").toggleClass("hidden");
-        $(".close").toggleClass("hidden");
-        $(".ham").toggleClass("hidden");
-      });
-
-      $(".close").click(function () {
-        if ($("nav").children("div").hasClass("hidden")) {
-
-          $("nav").children("div").removeClass("hidden");
-        } else {
-          $(".close").toggleClass("hidden");
-          $(".ham").toggleClass("hidden");
-          $("nav").children("div").addClass("hidden");
-        }
-      });
-    });
-
-
-  </script>
 </body>
 
 </html>
